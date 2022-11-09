@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Resize Image API</title>
+  <!-- Load Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Fira+Sans:900|Merriweather&display=swap" rel="stylesheet">
+  <!-- Load Styles -->
+  <link href="css/styles.css" rel="stylesheet">
+</head>
+
+<body onload="call()">
+  <!-- HTML Follows BEM naming conventions 
+  IDs are only used for sections to connect menu achors to sections -->
+  <header class="page__header">
+    <nav class="navbar__menu">
+      <!-- Navigation starts as empty UL that will be populated with JS -->
+      <ul id="navbar__list"></ul>
+    </nav>
+  </header>
+  <main>
+    <header class="main__hero">
+      <h1>Landing Page </h1>
+    </header>
+    <section id="section1" data-nav="Main" class="your-active-class">
+      <div class="landing__container">
+        <h2>Welcome to the image resizer program</h2>
+        <p>Here how to use the program to resize your image<br>
+        <h4>Put this in the url <sub>(Follow the syntax)</sub></h4>
+        </p>
+        <p>
+        <div class="box">"/api/image/resize?name={image name}&width={image width}&height={image height}" </p>
+        </div>
+        <div class="contents" id="content"></div>
+        <form action="upload.php" method="post" enctype="multipart/form-data">
+          Select image to upload:
+          <input type="file" name="fileToUpload" id="fileToUpload">
+          <input type="submit" value="Upload Image" name="submit">
+        </form>
+        <form action="">
+          <label for="quantity">Width (between 1 and 5):</label>
+          <input type="textbox" id="width">
+          <label for="quantity">Height</label> (between 1 and 5):</label>
+          <input type="number" id="height">
+          <input id="searchButton" type="submit">
+        </form>
+      </div>
+    </section>
+    <section id="section2" data-nav="Images">
+      <div class="landing__container">
+        <h2>Available Images</h2>
+        <p style="text-align:center"><b> Here the name of the images available<br>choose one from the avaliable
+            images</b></p>
+        <figure>
+          <div class="column">
+
+          </div>
+          <!-- <div class=" column">
+            <img src="../images/fjord.jpg" alt="fjord" style="width:100%">
+            <figcaption>Fjord.</figcaption>
+          </div>
+          <div class="column">
+            <img src="../images/icelandwaterfall.jpg" alt="icelandwaterfall" style="width:100%">
+            <figcaption>Icelandwaterfall.</figcaption>
+          </div>
+          <div class="column">
+            <img src="../images/palmtunnel.jpg" alt="palmtunnel" style="width:100%">
+            <figcaption>Palmtunnel.</figcaption>
+          </div>
+          <div class="column">
+            <img src="../images/santamonica.jpg" alt="santamonica" style="width:100%">
+            <figcaption>Santamonica.</figcaption>
+          </div> --> 
+        </figure>
+      </div>
+    </section>
+    <section id="section3" data-nav="Documentation">
+      <div class="landing__container">
+        <h2>API documentation</h2>
+        <div class="box2"><b>Endpoint</b>:/resize <br>
+          <center><a href="http://localhost:3000/api/image/resize">Resize</a> the image you want</p>
+          </center>
+        </div>
+        <div class="box2"><b>Reset</b>:/reset<br>
+          <center><a href="http://localhost:3000/api/reset">Delete</a> the thumbnail folder after you finish.</p>
+          </center>
+        </div>
+        <p> <b> Query parameters:</b></p>
+        <div class="box2"><b>Name:</b> String</div>
+        <div class="box2"><b>Width:</b> Number</div>
+        <div class="box2"><b>Height</b> Number</div>
+        <p><b> How to write request:</p>
+        <div class="box2"> localhost:3000/api/image/resize?name=fjord&width=700&height=500</div>
+        <div class="box2"> localhost:3000/api/image/resize?name=encenadaport&width=200&height=300</div>
+        <div class="box2"> localhost:3000/api/image/resize?name=palmtunnel&width=500&height=400</div>
+      </div>
+    </section>
+  </main>
+  <footer class="page__footer">
+    <p>&copy Khaled Elagamy</p>
+  </footer>
+  <script src="js/app.js"></script>
+</body>
+
+</html>
