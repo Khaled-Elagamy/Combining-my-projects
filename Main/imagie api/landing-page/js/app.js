@@ -89,21 +89,6 @@ window.addEventListener('scroll', function(event) {
   navMenu.style.top = '0'
 })
 
-//get width
-
-document.getElementById('searchButton').onclick = doSearch
-
-function doSearch() {
-  var w = document.getElementById('width').value
-  var h = document.getElementById('height').value
-  window.location =
-    '/api/image/resize?name=fjord&width=' +
-    w +
-    '&height=' +
-    encodeURIComponent(h)
-  return false // not entirely necessary, but just in case
-}
-
 let images
 let index = 0
 async function call() {

@@ -3,7 +3,7 @@ import sharp from 'sharp'
 import path from 'path'
 
 const processing = (req: express.Request, res: express.Response): void => {
-  const name = req.query.name as string,
+  const name = (req.query.imgname as string).replace(/\.[^\/.]+$/, ''),
     wide = Number(req.query.width as string),
     tall = Number(req.query.height as string)
   //Paths

@@ -13,7 +13,7 @@ image.get('/', (req: express.Request, res: express.Response) => {
 }),
   image.get('/resize', (req, res) => {
     //Definitions
-    const name = req.query.name
+    const name = (req.query.imgname as string).replace(/\.[^\/.]+$/, '')
     const wide = Number(req.query.width as string)
     const tall = Number(req.query.height as string)
     //Paths
