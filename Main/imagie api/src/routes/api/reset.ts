@@ -4,7 +4,7 @@ import { rmSync, access, constants } from 'fs'
 
 const reset = express.Router()
 // Directory path
-const dir = path.resolve('./') + '/images/Thumbnail'
+const dir = path.resolve('./') + '/landing-page/images/Thumbnail'
 //Return button
 const main = '<a href="javascript:window.location.replace(`/`);"> Main page</a>'
 
@@ -14,7 +14,7 @@ reset.get('/', (req, res) => {
   //To get the response
   reset.get('/ok', (req: express.Request, res: express.Response): void => {
     if (req.query.response === 'ok') {
-      access('images/Thumbnail', constants.F_OK, err => {
+      access('landing-page/images/Thumbnail', constants.F_OK, err => {
         console.log('\n> Checking if the thumbnail directory exists')
         if (err) {
           console.error('Directory is not found')

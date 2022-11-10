@@ -89,6 +89,7 @@ window.addEventListener('scroll', function(event) {
   navMenu.style.top = '0'
 })
 //To view images dynamiclly from the folder
+
 let images
 let index = 0
 async function call() {
@@ -121,6 +122,16 @@ async function call() {
       div1.appendChild(div2)
       imgfragment.appendChild(div1)
     })
+    //To create option deop list
+    const options = document.querySelector('select')
+    const optfragment = document.createDocumentFragment()
+    images.forEach(image => {
+      const option = document.createElement('option')
+      option.value = image
+      option.innerText = image
+      optfragment.appendChild(option)
+    })
+    options.appendChild(optfragment)
 
     content.appendChild(imgfragment)
   } catch (err) {
@@ -155,12 +166,61 @@ async function call() {
 //   }
 // }
 
-var aTags = document.querySelectorAll('span[data-href]')
+// var aTags = document.querySelectorAll('span[data-href]')
 
-for (var i = 0; i < aTags.length; i++) {
-  var aTag = aTags[i]
-  aTag.addEventListener('click', function(e) {
-    var ele = e.target
-    window.location.replace(ele.getAttribute('data-href'))
-  })
+// for (var i = 0; i < aTags.length; i++) {
+//   var aTag = aTags[i]
+//   aTag.addEventListener('click', function(e) {
+//     var ele = e.target
+//     window.location.replace(ele.getAttribute('data-href'))
+//   })
+// }
+
+function fileValidation() {
+  var fileInput = document.getElementById('fileToUpload')
+
+  var filePath = fileInput.value
+
+  // Allowing file type
+  var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i
+
+  if (!allowedExtensions.exec(filePath)) {
+    alert('Invalid file type')
+    fileInput.value = ''
+    return false
+  } else {
+    // Image preview
+    if (fileInput.files && fileInput.files[0]) {
+      var reader = new FileReader()
+      reader.onload = function(e) {
+        document.getElementById('imagePreview').innerHTML =
+          '<img src="' + e.target.result + '"/>'
+      }
+
+      reader.readAsDataURL(fileInput.files[0])
+    }
+  }
+  getoutput()
+}
+
+const options = document.getElementById('options')
+const upload = document.getElementById('fileToUpload')
+const uploadtext = document.getElementById('upload')
+uploadtext.hidden = true
+upload.disabled = true
+upload.hidden = true
+function check() {
+  if (options.value == 'selectoption') {
+    alert('Please choose an option')
+    options.focus()
+  } else if (options.value == 'none') {
+    upload.disabled = false
+    upload.hidden = false
+    uploadtext.hidden = false
+    upload.required = true
+  } else {
+    upload.disabled = true
+    upload.hidden = true
+    uploadtext.hidden = true
+  }
 }

@@ -60,13 +60,13 @@ image.get('/resize', (req, res) => {
     return res.status(200).sendFile(imgEdited)
   }
   //To check if the Thumbnail directory is found
-  access('images/Thumbnail', constants.F_OK, err => {
+  access('/landing-page/images/Thumbnail', constants.F_OK, err => {
     console.log('\n> Checking if the thumbnail directory exists')
     if (err) {
       console.error('File does not exist')
       // Create the file
       console.log('\n> Creating the file')
-      mkdir('images/Thumbnail', err => {
+      mkdir('landing-page/images/Thumbnail', err => {
         if (err) {
           return console.error(err)
         }
