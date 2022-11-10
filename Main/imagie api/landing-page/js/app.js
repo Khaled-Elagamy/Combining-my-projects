@@ -131,6 +131,10 @@ async function call() {
       option.innerText = image
       optfragment.appendChild(option)
     })
+    const option = document.createElement('option')
+    option.value = 'none'
+    option.innerText = 'Upload image'
+    optfragment.appendChild(option)
     options.appendChild(optfragment)
 
     content.appendChild(imgfragment)
@@ -210,10 +214,7 @@ uploadtext.hidden = true
 upload.disabled = true
 upload.hidden = true
 function check() {
-  if (options.value == 'selectoption') {
-    alert('Please choose an option')
-    options.focus()
-  } else if (options.value == 'none') {
+  if (options.value == 'none') {
     upload.disabled = false
     upload.hidden = false
     uploadtext.hidden = false
@@ -222,5 +223,12 @@ function check() {
     upload.disabled = true
     upload.hidden = true
     uploadtext.hidden = true
+  }
+}
+
+function validate() {
+  if (options.value == 'selectoption') {
+    alert('Please select an image')
+    options.focus()
   }
 }

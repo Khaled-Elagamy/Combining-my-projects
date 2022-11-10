@@ -38,13 +38,15 @@
 
         <form method="GET" action="/api/image/resize" target="_blank">
 
-          <label for="image">Choose the image:</label>
-          <select name="imgname" id="options" required>
-            <option value="selectoption">--- Please select ---</option>
+          <div style="width:200px;">
 
-            <!-- Options will be populated with JS -->
-            <option value="none">None</option>
-          </select><br><br>
+            <label for="image">Choose the image:</label>
+            <select name="imgname" id="options" onchange="check()" required>
+              <option value="selectoption">--- Please select ---</option>
+
+              <!-- Options will be populated with JS -->
+            </select><br><br>
+          </div>
 
           <label id="upload" for="fileToUpload">Select image to upload:</label>
           <input type="file" name="imgname" id="fileToUpload" accept="image/*" onChange='fileValidation()'><br><br>
@@ -52,7 +54,7 @@
           <input type="number" min="1" id="width" name="width" required><br>
           <label for="quantity">Height</label>
           <input type="number" min="1" id="height" name="height" required><br>
-          <input id="searchButton" onmouseover="check()" type="submit">
+          <input id="searchButton" onmouseover="validate()" type="submit">
         </form>
       </div>
     </section>
