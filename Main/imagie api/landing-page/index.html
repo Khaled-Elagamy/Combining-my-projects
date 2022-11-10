@@ -35,13 +35,13 @@
         <div class="box">"/api/image/resize?name={image name}&width={image width}&height={image height}" </p>
         </div>
         <div class="contents" id="content"></div>
-        <form method="GET" action="/api/image/resize">
+        <form method="GET" action="/api/image/resize" target="_blank">
           Select image to upload:
-          <input type="file" name="imgname" id="fileToUpload" accept="image/*" onChange='getoutput()'>
-          <label for=" quantity">Width (between 1 and 5):</label>
-          <input type="textbox" id="width" name="width">
-          <label for="quantity">Height</label> (between 1 and 5):</label>
-          <input type="number" id="height" name="height">
+          <input type="file" name="imgname" id="fileToUpload" accept="image/*" onChange='getoutput()'><br><br>
+          <label for=" quantity">Width</label>
+          <input type="number" id="width" name="width"><br>
+          <label for="quantity">Height</label>
+          <input type="number" id="height" name="height"><br>
           <input id="searchButton" type="submit">
         </form>
       </div>

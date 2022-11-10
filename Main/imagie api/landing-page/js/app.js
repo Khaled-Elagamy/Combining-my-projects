@@ -88,12 +88,12 @@ window.addEventListener('scroll', function(event) {
   }, 3000)
   navMenu.style.top = '0'
 })
-
+//To view images dynamiclly from the folder
 let images
 let index = 0
 async function call() {
   try {
-    const response = await fetch('/show-images')
+    const response = await fetch('/api/image')
     images = await response.json()
 
     const content = document.querySelector('figure')
@@ -121,4 +121,14 @@ async function call() {
   } catch (err) {
     console.error(err)
   }
+}
+
+var aTags = document.querySelectorAll('span[data-href]')
+
+for (var i = 0; i < aTags.length; i++) {
+  var aTag = aTags[i]
+  aTag.addEventListener('click', function(e) {
+    var ele = e.target
+    window.location.replace(ele.getAttribute('data-href'))
+  })
 }

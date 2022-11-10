@@ -7,9 +7,11 @@ const processing = (req: express.Request, res: express.Response): void => {
     wide = Number(req.query.width as string),
     tall = Number(req.query.height as string)
   //Paths
-  const imgName: string = path.resolve('./') + `/images/${name}.jpg`
+  const imgName: string =
+    path.resolve('./') + `/landing-page/images/${name}.jpg`
   const imgEdited: string =
-    path.resolve('./') + `/images/Thumbnail/${name}-${wide}-${tall}.jpg`
+    path.resolve('./') +
+    `/landing-page/images/Thumbnail/${name}-${wide}-${tall}.jpg`
   ;(async function() {
     try {
       await sharp(imgName)

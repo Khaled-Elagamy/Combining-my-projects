@@ -6,7 +6,7 @@ const reset = express.Router()
 // Directory path
 const dir = path.resolve('./') + '/images/Thumbnail'
 //Return button
-const main = '<a href="http://localhost:3000"> Main page</a>'
+const main = '<a href="javascript:window.location.replace(`/`);"> Main page</a>'
 
 reset.get('/', (req, res) => {
   res.sendFile(path.resolve('./') + '/landing-page/reset.html')

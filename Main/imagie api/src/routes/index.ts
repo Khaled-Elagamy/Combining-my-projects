@@ -6,7 +6,7 @@ const routes = express.Router()
 
 routes.get('/', (req: express.Request, res: express.Response): void => {
   res.send(
-    '<center><b><h2>Nothing to show here let me help you to get to the main page<br><a href="http://localhost:3000"> Main page</a>'
+    '<center><b><h2>Nothing to show here let me help you to get to the main page<br><a href="javascript:window.location.replace(`/`);"> Main page</a>'
   )
 })
 

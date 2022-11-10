@@ -1,40 +1,92 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="UTF-8">
   <title>Reset directory site</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <style>
-    body { padding-top: 100px; }
-    .box{
-    border: 3px solid green;
-    padding: 20px;
-    margin: 20px;
-    background-color: rgb(151, 107, 107);
-  }
-  .alert {
-    padding: 20px;
-    background-color: #f44336;
-    color: white;
-    margin-bottom: 15px;
-  }
+    body {
+      padding-top: 100px;
+    }
+
+    .box {
+      border: 3px solid green;
+      padding: 20px;
+      margin: 20px;
+      background-color: rgb(107, 128, 151);
+    }
+
+    .alert {
+      padding: 20px;
+      background-color: #f44336;
+      color: white;
+      margin-bottom: 15px;
+    }
+
+    .btn {
+      border: none;
+      /* Remove borders */
+      color: white;
+      /* Add a text color */
+      padding: 17px 32px;
+      /* Add some padding */
+      cursor: pointer;
+      /* Add a pointer cursor on mouse-over */
+      font-size: 16px;
+      margin: 40px 20px;
+      border-radius: 12px;
+    }
+
+    .safe {
+      background-color: #04AA6D;
+    }
+
+    /* Green */
+    .safe:hover {
+      background-color: #46a049;
+    }
+
+    .warning {
+      background-color: #ff9800;
+    }
+
+    /* Orange */
+    .warning:hover {
+      background: #e68a00;
+    }
   </style>
 </head>
+
 <body>
   <div class="alert">
     Watch Out! Your are going to delete the thumbnail file
-  </div> 
- <div class="container">
+  </div>
+  <div class="container">
     <div class="jumbotron">
       <div class="box">
         <h1>Your are going to delete the thumbnail file
-          if you agree click here to delete<p><center><h1><a href="http://localhost:3000/api/reset/ok?response=ok">Delete</a></p></center></h1>
-          <h2>To return to the main page <a href="http://localhost:3000"> Main page</a></h2>
-        </div>
+          <center>
+            <button onclick="home()" class="btn safe ">Main page</button>
+            <button onclick="Delete()" class="btn warning ">Delete </button>
+          </center>
       </div>
+    </div>
   </div>
 
+  <script>
 
+    function Delete() {
+      window.location.replace("/api/reset/ok?response=ok");
+      window.history.replaceState({}, document.title, "/api/reset/ok?response=ok");
+    }
+    function home() {
+      window.location.replace("/");
+      window.history.replaceState({}, document.title, "/");
+    }
+  </script>
 
 </body>
+
 </html>
