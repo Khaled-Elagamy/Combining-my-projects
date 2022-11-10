@@ -58,18 +58,12 @@ section {
 
 figure {
     padding: 4px;
-    display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     float: left;
     object-fit: cover;
 }
 
-.column {
-    float: left;
-    /* width: 30%; */
-    padding: 5px;
-}
 
 figcaption {
     background-color: black;
@@ -77,6 +71,7 @@ figcaption {
     font-style: italic;
     padding: 2px;
     text-align: center;
+    word-wrap: break-word;
 }
 
 /* ---- Module Rules ---- */
@@ -186,6 +181,33 @@ section.your-active-class .landing__container::after {
     transition: 0.3s;
 }
 
+/*try */
+
+div.gallery {
+    border: 1px solid #ccc;
+}
+
+div.gallery:hover {
+    border: 1px solid #777;
+}
+
+div.gallery img {
+    width: 100%;
+    height: auto;
+}
+
+
+* {
+    box-sizing: border-box;
+}
+
+.responsive {
+    padding: 0 6px;
+    float: left;
+    width: 23.99999%;
+    display: inline-flexbox
+}
+
 @media only screen and (max-width: 700px) {
     .responsive {
         width: 49.99999%;
@@ -197,4 +219,10 @@ section.your-active-class .landing__container::after {
     .responsive {
         width: 100%;
     }
+}
+
+.clearfix:after {
+    content: "";
+    display: table;
+    clear: both;
 }

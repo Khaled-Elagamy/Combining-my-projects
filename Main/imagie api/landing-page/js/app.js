@@ -95,26 +95,31 @@ async function call() {
   try {
     const response = await fetch('/api/image')
     images = await response.json()
-
     const content = document.querySelector('figure')
     const imgfragment = document.createDocumentFragment()
     images.forEach(image => {
-      const div = document.createElement('div')
+      const div1 = document.createElement('div')
+      div1.className = 'responsive'
+      const div2 = document.createElement('div')
+      div2.className = 'gallery'
+      const link = document.createElement('a')
+      link.target = '_blank'
+      link.href = image
+      div2.appendChild(link)
       const img = document.createElement('img')
       const figcaption = document.createElement('figcaption')
-      div.className = 'column'
 
       img.src = '../images/' + image
       img.alt = image
-      // prettier-ignore
-      img.style = "width:100%";
+      img.width = '600'
+      img.height = '400'
       //;(img.width = 500), (height = 300)
       figcaption.innerText = image
 
-      div.appendChild(img)
-      div.appendChild(figcaption)
-
-      imgfragment.appendChild(div)
+      link.appendChild(img)
+      div2.appendChild(figcaption)
+      div1.appendChild(div2)
+      imgfragment.appendChild(div1)
     })
 
     content.appendChild(imgfragment)
@@ -122,6 +127,33 @@ async function call() {
     console.error(err)
   }
 }
+
+//     const content = document.querySelector('figure')
+//     const imgfragment = document.createDocumentFragment()
+//     images.forEach(image => {
+//       const div = document.createElement('div')
+//       const img = document.createElement('img')
+//       const figcaption = document.createElement('figcaption')
+//       div.className = 'column'
+
+//       img.src = '../images/' + image
+//       img.alt = image
+//       // prettier-ignore
+//       img.style = "width:100%";
+//       //;(img.width = 500), (height = 300)
+//       figcaption.innerText = image
+
+//       div.appendChild(img)
+//       div.appendChild(figcaption)
+
+//       imgfragment.appendChild(div)
+//     })
+
+//     content.appendChild(imgfragment)
+//   } catch (err) {
+//     console.error(err)
+//   }
+// }
 
 var aTags = document.querySelectorAll('span[data-href]')
 
