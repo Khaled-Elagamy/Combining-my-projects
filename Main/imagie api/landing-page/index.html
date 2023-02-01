@@ -36,6 +36,17 @@
         </div>
         <div class="contents" id="content"></div>
 
+
+        <h1>Upload Image</h1>
+        <iframe name="votar" style="display:none;"></iframe>
+        <form method="POST" action="/upload" enctype="multipart/form-data" target="votar">
+          <input type="file" name="image">
+          <input type="submit" onclick="call()">
+        </form>
+
+
+
+
         <form method="GET" action="/api/image/resize" target="_blank">
 
           <div style="width:200px;">
@@ -43,18 +54,22 @@
             <label for="image">Choose the image:</label>
             <select name="imgname" id="options" onchange="check()" required>
               <option value="selectoption">--- Please select ---</option>
+              <option value='none'>Upload image</option>
 
               <!-- Options will be populated with JS -->
             </select><br><br>
           </div>
-
-          <label id="upload" for="fileToUpload">Select image to upload:</label>
-          <input type="file" name="imgname" id="fileToUpload" accept="image/*" onChange='fileValidation()'><br><br>
+          <div id="UploadedImage" hidden="true">
+            <label for="fileToUpload">Select image to upload:</label>
+            <input type="file" disabled="true" name="imgname" id="fileToUpload" accept="image/*"
+              onChange='fileValidation()'><br><br>
+          </div>
           <label for=" quantity">Width</label>
           <input type="number" min="1" id="width" name="width" required><br>
           <label for="quantity">Height</label>
           <input type="number" min="1" id="height" name="height" required><br>
           <input id="searchButton" onmouseover="validate()" type="submit">
+          <div id="imagePreview"></div>
         </form>
       </div>
     </section>
@@ -65,15 +80,17 @@
             images</b></p>
 
 
-        <div id="imagePreview"></div>
-        <figure>
+
+        <picture>
           <!-- Images will be populated with JS -->
 
-        </figure>
+        </picture>
         <div class="clearfix"></div>
 
       </div>
     </section>
+
+
     <section id="section3" data-nav="Documentation">
       <div class="landing__container">
         <h2>API documentation</h2>
@@ -99,7 +116,7 @@
   <footer class="page__footer">
     <p>&copy Khaled Elagamy</p>
   </footer>
-  <script src="js/app.js"></script>
+  <script src="js/app.js" async></script>
 </body>
 
 </html>

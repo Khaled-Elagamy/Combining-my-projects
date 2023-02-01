@@ -10,7 +10,7 @@ const show = async (
     const files = await promises.readdir('../imagie api/landing-page/images/')
     let jsonstr: string[] = []
     files.forEach(file => {
-      if (path.extname(file) == '.jpg') {
+      if (path.extname(file) == '.jpg' || path.extname(file) == '.png') {
         jsonstr.push(file)
       }
     })

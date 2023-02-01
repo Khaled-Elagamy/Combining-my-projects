@@ -2,9 +2,26 @@ import express from 'express'
 import routes from './routes/index'
 import logger from './utilities/logger'
 import path from 'path'
+import multer from 'multer'
 
 const app = express()
 const port = 3000
+
+const storage = multer.diskStorage({
+  destination(req, file, cb) {
+    cb(null, './landing-page/images')
+  },
+  filename(req, file, cb) {
+    const { originalname } = file
+    const fileExtension = (originalname.match(/\.+[\S]+$/) || [])[0]
+    cb(null, `${file.fieldname}__${Date.now()}${fileExtension}`)
+  }
+})
+const upload = multer({ storage })
+app.post('/upload', upload.single('image'), (req, res) => {
+  console.log(req.file)
+  return req.file?.filename
+})
 
 app.use('/api', logger, routes)
 

@@ -26,7 +26,7 @@ image.get('/resize', (req, res) => {
       .status(400)
       .send(`<center><h1> Query parameter name not defined.${main}</center>`)
   } else {
-    name = name.replace(/\.[^\/.]+$/, '')
+    name = name.toString().replace(/\.[^\/.]+$/, '')
   }
 
   //Definitions

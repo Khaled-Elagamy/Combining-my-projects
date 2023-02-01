@@ -21,6 +21,7 @@ export const create = async (
     })
   } catch (error) {
     next(error)
+    res.json(req.body)
   }
 }
 

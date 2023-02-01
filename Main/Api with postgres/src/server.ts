@@ -13,6 +13,8 @@ const port = config.port || 3000
 
 //Parser middleware
 app.use(express.json())
+app.use(express.urlencoded({ extended: false }))
+
 //Security middleware
 app.use(helmet())
 //Logger middleware
