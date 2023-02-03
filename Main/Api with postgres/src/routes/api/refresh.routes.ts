@@ -1,4 +1,4 @@
-import { Router, Request, Response } from 'express'
+import { Router } from 'express'
 import refreshTokenGenerator from '../../controllers/refreshToken.controller'
 
 const routes = Router()

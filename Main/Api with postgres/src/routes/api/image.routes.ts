@@ -1,12 +1,12 @@
-import express from 'express'
+import { Router, Request, Response } from 'express'
 import path from 'path'
 import { existsSync, access, constants, mkdir } from 'fs'
 import processing from '../../middleware/processing'
 
-const image = express.Router()
+const image = Router()
 const main = '<br><a href="http://localhost:3000"> Main page</a>'
 
-image.get('/', (req: express.Request, res: express.Response) => {
+image.get('/', (req:Request, res: Response) => {
   return res.send(
     `<h1><center>This page is not developed Yet <br>Come again later :)${main}</center>`
   )

@@ -26,15 +26,17 @@ app.use(errorMiddleware)
 //Cookies middleware
 app.use(cookieParser())
 //Routes
-app.use('/api', logger, routes)
+app.use('/app', logger, routes)
 //Main page
-app.get('/', logger, function (req: Request, res: Response) {
+app.get('/Home', logger, function (req: Request, res: Response) {
   res.sendFile(path.resolve('./') + '/landing-page/index.html')
-  req.cookies
+})
+app.get('/', function (req: Request, res: Response) {
+  res.redirect('/Home')
 })
 app.use(express.static('landing-page'))
 //Register and login page
-app.get('/api', logger, function (req: Request, res: Response) {
+app.get('/Login', logger, function (req: Request, res: Response) {
   res.sendFile(path.resolve('./') + '/register-page/reg.html')
 })
 app.use(express.static('register-page'))

@@ -1,8 +1,8 @@
-import express from 'express'
+import { Router, Request, Response } from 'express'
 import path from 'path'
 import { rmSync, access, constants } from 'fs'
 
-const reset = express.Router()
+const reset = Router()
 // Directory path
 const dir = path.resolve('./') + '/images/Thumbnail'
 //Return button
@@ -12,9 +12,9 @@ reset.get('/', (req, res) => {
   res.sendFile(path.resolve('./') + '/landing-page/reset.html')
 }),
   //To get the response
-  reset.get('/ok', (req:express.Request, res:express.Response):void => {
+  reset.get('/ok', (req: Request, res: Response): void => {
     if (req.query.response === 'ok') {
-      access('images/Thumbnail', constants.F_OK, err => {
+      access('images/Thumbnail', constants.F_OK, (err) => {
         console.log('\n> Checking if the thumbnail directory exists')
         if (err) {
           console.error('Directory is not found')

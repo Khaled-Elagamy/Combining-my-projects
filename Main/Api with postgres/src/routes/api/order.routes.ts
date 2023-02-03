@@ -1,4 +1,4 @@
-import { Router, Request, Response } from 'express'
+import { Router } from 'express'
 import * as controllers from '../../controllers/order.controller'
 import * as productscontroller from '../../controllers/order-products.controller'
 import authMiddleware from '../../middleware/authentication'
