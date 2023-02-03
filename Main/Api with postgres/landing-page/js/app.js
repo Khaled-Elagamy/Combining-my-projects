@@ -14,7 +14,7 @@ const newFragment = document.createDocumentFragment()
 
 // build the nav
 
-sections.forEach(section => {
+sections.forEach((section) => {
   const secTitle = section.getAttribute('data-nav')
   const navItem = document.createElement('li')
   const navLink = document.createElement('a')
@@ -23,15 +23,14 @@ sections.forEach(section => {
 
   // Scroll to section on link click
 
-  navLink.addEventListener('click', function() {
+  navLink.addEventListener('click', function () {
     section.scrollIntoView({ behavior: 'smooth', block: 'center' })
   })
   navItem.appendChild(navLink)
 
   newFragment.appendChild(navItem)
 })
-
-navMenu.appendChild(newFragment)
+if (newFragment && navMenu) navMenu.appendChild(newFragment)
 
 /**
  * Begin Main Functions
@@ -64,7 +63,7 @@ function setActiveClass() {
 function setActiveLink(section) {
   const links = document.querySelectorAll('a')
   const activeSection = section.getAttribute('data-nav')
-  links.forEach(link => {
+  links.forEach((link) => {
     if (link.innerText === activeSection) {
       link.classList.add('menu__link-active')
     } else {
@@ -74,16 +73,16 @@ function setActiveLink(section) {
 }
 // Set sections as active
 
-document.addEventListener('scroll', function() {
+document.addEventListener('scroll', function () {
   setActiveClass()
 })
 
 // Hide navbar when not scrolling
 
 let hide
-window.addEventListener('scroll', function(event) {
+window.addEventListener('scroll', function (event) {
   window.clearTimeout(hide)
-  hide = setTimeout(function() {
+  hide = setTimeout(function () {
     navMenu.style.top = '-100px'
   }, 3000)
   navMenu.style.top = '0'

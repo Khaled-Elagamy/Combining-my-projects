@@ -136,7 +136,7 @@ export const authenticate = async (
       })
       delete user.refreshtoken
       const accessToken = jwt.sign(
-        { username:user.user_name },
+        { username: user.user_name },
         config.tokenSecret as unknown as string,
         { expiresIn: '30s' }
       )
