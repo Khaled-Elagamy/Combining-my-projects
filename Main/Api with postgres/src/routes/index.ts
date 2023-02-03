@@ -4,6 +4,7 @@ import reset from './api/reset.routes'
 import usersRoutes from './api/users.routes'
 import productRoutes from './api/products.routes'
 import orderRoutes from './api/order.routes'
+import refreshRoute from'./api/refresh.routes'
 
 const routes = Router()
 
@@ -12,5 +13,6 @@ routes.use('/products', productRoutes)
 routes.use('/orders', orderRoutes)
 routes.use('/reset', reset)
 routes.use('/image', image)
+routes.use('/refresh',refreshRoute)
 
 export default routes

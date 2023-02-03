@@ -7,6 +7,7 @@ import routes from './routes'
 import config from './config'
 import db from './database'
 import path from 'path'
+import cookieParser from 'cookie-parser'
 
 const app: Application = express()
 const port = config.port || 3000
@@ -22,13 +23,17 @@ app.use(helmet())
 app.use(limiter)
 //Error handler middleware
 app.use(errorMiddleware)
+//Cookies middleware
+app.use(cookieParser())
 //Routes
 app.use('/api', logger, routes)
-
+//Main page
 app.get('/', logger, function (req: Request, res: Response) {
   res.sendFile(path.resolve('./') + '/landing-page/index.html')
+  req.cookies
 })
 app.use(express.static('landing-page'))
+//Register and login page
 app.get('/api', logger, function (req: Request, res: Response) {
   res.sendFile(path.resolve('./') + '/register-page/reg.html')
 })
@@ -45,17 +50,6 @@ db.connect().then((client) => {
       client.release()
       console.log(err.stack)
     })
-})
-app.post('/formdata-as-json', (request, response) => {
-  //Destructure the request body
-  let resData = {
-    serverData: request.body,
-  }
-
-  //Console log the response data (for debugging)
-  console.log(resData)
-  //Send the response as JSON with status code 200 (success)
-  response.status(200).json(resData)
 })
 
 app.use((_req: Request, res: Response) => {

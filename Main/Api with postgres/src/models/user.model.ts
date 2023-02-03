@@ -2,6 +2,7 @@ import db from '../database'
 import User from '../types/user.type'
 import config from '../config'
 import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
 
 //hash password
 const hash = (password: string) => {
@@ -107,7 +108,7 @@ class UserModel {
     }
   }
   //authenticate user
-  async authenticate(email: string, password: string): Promise<User | null> {
+  async authenticate(email: string, password: string) {
     try {
       const connection = await db.connect()
       const sql = 'SELECT password FROM users WHERE email=$1'
@@ -119,15 +120,26 @@ class UserModel {
           hash
         )
         if (isPasswordValid) {
-          const userInfo = await connection.query(
-            'SELECT id, email, user_name, first_name, last_name FROM users WHERE email=($1)',
+          const usernameinfo = await connection.query(
+            'SELECT user_name FROM users WHERE email=($1)',
             [email]
+          )
+          //Saving refreshToken with user in db
+          const { user_name: username } = usernameinfo.rows[0]
+          const refreshToken = jwt.sign(
+            { username },
+            config.refreshTokenSecret as unknown as string,
+            { expiresIn: '1w' }
+          )
+          const userInfo = await connection.query(
+            'UPDATE users SET refreshtoken=$1 WHERE email=$2 RETURNING  user_name,refreshtoken',
+            [refreshToken, email]
           )
           return userInfo.rows[0]
         }
       }
+
       connection.release()
-      return null
     } catch (error) {
       throw new Error(`Unable to login:${(error as Error).message}`)
     }
