@@ -138,19 +138,19 @@ class UserModel {
         )
         if (isPasswordValid) {
           const usernameinfo = await connection.query(
-            'SELECT user_name FROM users WHERE email=($1)',
+            'SELECT * FROM users WHERE email=($1)',
             [email]
           )
+          console.log(usernameinfo.rows[0])
           //Saving refreshToken with user in db
           const { user_name: username } = usernameinfo.rows[0]
           const refreshToken = jwt.sign(
             { username },
             config.refreshTokenSecret as unknown as string,
-            { expiresIn: '1w' }
+            { expiresIn: '7d' }
           )
           const sql =
-            //'UPDATE users SET refreshtoken = array_append(refreshtoken,$1) WHERE email=$2 RETURNING user_name,refreshtoken[array_length(refreshtoken, 1)]'
-            'UPDATE users SET refreshtoken = array_append(refreshtoken,$1) WHERE email=$2 RETURNING *'
+            'UPDATE users SET refreshtoken = array_append(refreshtoken,$1) WHERE email=$2 RETURNING user_name,refreshtoken[array_length(refreshtoken, 1)]'
           const userInfo = await connection.query(sql, [refreshToken, email])
           return userInfo.rows[0]
         }

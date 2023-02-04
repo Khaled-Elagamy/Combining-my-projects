@@ -55,7 +55,7 @@ class refreshTokenModel {
       const newrefreshToken = jwt.sign(
         { username: user_name },
         config.refreshTokenSecret as unknown as string,
-        { expiresIn: '1w' }
+        { expiresIn: '7d' }
       )
       //Saving refreshToken with user in db
       const connection = await db.connect()

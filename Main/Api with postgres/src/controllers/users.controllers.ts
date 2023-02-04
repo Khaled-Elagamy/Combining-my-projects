@@ -2,8 +2,10 @@ import { NextFunction, Request, Response } from 'express'
 import UserModel from '../models/user.model'
 import jwt from 'jsonwebtoken'
 import config from '../config'
+import LogoutModel from '../models/logout.model'
 
 const userModel = new UserModel()
+const logoutModel = new LogoutModel()
 
 export const create = async (
   req: Request,
@@ -118,17 +120,31 @@ export const authenticate = async (
   next: NextFunction
 ) => {
   try {
+    const cookies = req.cookies
     const { email, password } = req.body
 
     const user = await userModel.authenticate(email, password)
-    
-    console.log(user)
+
     if (!user) {
       return res.status(401).json({
         status: 'error',
         message: 'The username and password do not match',
       })
     } else {
+      //Checking if there is an already defined cookie
+      if (cookies?.Token) {
+        if (await logoutModel.checkFoundToken(cookies.Token)) {
+          await logoutModel.logout(cookies.Token)
+        }
+      } //Deleting the cookie if found
+      if (cookies?.Token) {
+        res.clearCookie('Token', {
+          httpOnly: true,
+          sameSite: 'none',
+          secure: true,
+        })
+      }
+      //Creating new one
       res.cookie('Token', user.refreshtoken, {
         httpOnly: true,
         sameSite: 'none',

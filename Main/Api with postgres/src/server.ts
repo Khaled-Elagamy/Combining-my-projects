@@ -18,7 +18,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
 //Security middleware
-//remove helmet for secuity reasons
+//remove helmet for secuity reasons not https
 //app.use(helmet())
 //Logger middleware
 //Rate limiter middleware
@@ -27,15 +27,14 @@ app.use(limiter)
 app.use(errorMiddleware)
 //Cookies middleware
 app.use(cookieParser())
-//remove cors for secuity reasons
-/*
-app.use(cors())
+//remove cors for secuity reasons not https
+//app.use(cors())
 app.use(
   cors({
     allowedHeaders: [
       'Origin',
       'X-Requested-With',
-      'Content-Type',
+      //'Content-Type',
       'Accept',
       'X-Access-Token',
       'Authorization',
@@ -44,12 +43,12 @@ app.use(
       'Access-Control-Allow-Headers',
       'Access-Control-Allow-Methods',
     ],
-    methods: 'GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE',
+    methods: 'GET,,PATCH,POST,DELETE',
     preflightContinue: true,
     credentials: true,
   })
 )
-*/
+
 app.use(function (req, res, next) {
   if (req.url.slice(-1) === '/' && req.url.length > 1) {
     res.redirect(301, req.url.slice(0, -1))
