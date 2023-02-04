@@ -2,11 +2,11 @@ import db from '../database'
 import User from '../types/user.type'
 
 class LogoutModel {
-  //get refershToken
+  //get refershToken from db
   async checkFoundToken(refreshtoken: Text): Promise<User> {
     try {
       const connection = await db.connect()
-      const sql = 'SELECT id,user_name FROM users WHERE refreshtoken=($1)'
+      const sql = 'SELECT id,user_name FROM users WHERE $1 = ANY(refreshtoken)'
       const result = await connection.query(sql, [refreshtoken])
       connection.release()
       return result.rows[0]
@@ -18,11 +18,12 @@ class LogoutModel {
       )
     }
   }
-  //Delete refreshToken
+  //Delete refreshToken from db
   async logout(refreshtoken: Text) {
     try {
       const connection = await db.connect()
-      const sql = "UPDATE users SET refreshtoken= '' WHERE refreshtoken=($1)"
+      const sql =
+        'UPDATE users SET refreshtoken = array_remove(refreshtoken, $1) WHERE $1 = ANY(refreshtoken)'
       await connection.query(sql, [refreshtoken])
       connection.release()
     } catch (error) {

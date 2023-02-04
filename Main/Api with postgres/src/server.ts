@@ -66,12 +66,28 @@ app.get('/', function (req: Request, res: Response) {
 app.get('/Home', logger, async (req: Request, res: Response) => {
   res.sendFile(path.resolve('./') + '/landing-page/index.html')
 })
-app.use(express.static('landing-page'))
+app.use(
+  express.static('landing-page', {
+    maxAge: '1h',
+    setHeaders: function (res) {
+      res.set('Cache-Control', 'public, max-age=3600')
+      res.set('Expires', new Date(Date.now() + 3600 * 1000).toUTCString())
+    },
+  })
+)
 //Register and login page
 app.get('/Login', logger, function (req: Request, res: Response) {
   res.sendFile(path.resolve('./') + '/register-page/reg.html')
 })
-app.use(express.static('register-page'))
+app.use(
+  express.static('register-page', {
+    maxAge: '1h',
+    setHeaders: function (res) {
+      res.set('Cache-Control', 'public, max-age=3600')
+      res.set('Expires', new Date(Date.now() + 3600 * 1000).toUTCString())
+    },
+  })
+)
 
 db.connect().then((client) => {
   return client

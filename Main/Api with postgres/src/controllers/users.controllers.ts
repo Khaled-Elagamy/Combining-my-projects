@@ -121,7 +121,8 @@ export const authenticate = async (
     const { email, password } = req.body
 
     const user = await userModel.authenticate(email, password)
-
+    
+    console.log(user)
     if (!user) {
       return res.status(401).json({
         status: 'error',
@@ -140,7 +141,6 @@ export const authenticate = async (
         config.tokenSecret as unknown as string,
         { expiresIn: '30s' }
       )
-
       return res.json({
         status: 'success',
         data: { ...user, accessToken },

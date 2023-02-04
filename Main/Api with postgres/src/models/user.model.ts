@@ -48,6 +48,23 @@ class UserModel {
   async getOne(id: number): Promise<User> {
     try {
       const connection = await db.connect()
+      /*
+       var sql = ''
+      const type = typeof id
+      switch (type) {
+        case 'number':
+          sql =
+            'SELECT id, email, user_name, first_name, last_name FROM users WHERE id=($1)'
+          break
+        case 'string':
+          sql =
+            'SELECT id, email, user_name, first_name, last_name FROM users WHERE user_name=($1)'
+          break
+        default:
+          throw new Error(`Something wrong happened`)
+          break
+      }
+       */
       const sql =
         'SELECT id, email, user_name, first_name, last_name FROM users WHERE id=($1)'
       const result = await connection.query(sql, [id])
@@ -131,10 +148,10 @@ class UserModel {
             config.refreshTokenSecret as unknown as string,
             { expiresIn: '1w' }
           )
-          const userInfo = await connection.query(
-            'UPDATE users SET refreshtoken=$1 WHERE email=$2 RETURNING  user_name,refreshtoken',
-            [refreshToken, email]
-          )
+          const sql =
+            //'UPDATE users SET refreshtoken = array_append(refreshtoken,$1) WHERE email=$2 RETURNING user_name,refreshtoken[array_length(refreshtoken, 1)]'
+            'UPDATE users SET refreshtoken = array_append(refreshtoken,$1) WHERE email=$2 RETURNING *'
+          const userInfo = await connection.query(sql, [refreshToken, email])
           return userInfo.rows[0]
         }
       }
